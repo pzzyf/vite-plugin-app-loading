@@ -1,6 +1,6 @@
 {
   "name": "@afe1/vite-plugin-app-loading",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Inject a loading overlay into Vite HTML and expose a manual remover for app startup.",
   "type": "module",
   "packageManager": "pnpm@10.31.0",
