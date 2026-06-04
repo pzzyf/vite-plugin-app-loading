@@ -1,6 +1,6 @@
-import type { PluginOption } from 'vite'
+import type { Plugin } from 'vite'
 
-import fsp from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 
 const BODY_RE = /(<body\b[^>]*>)/i
 const APP_LOADING_ID = '__app-loading__'
@@ -51,20 +51,16 @@ export { removeAppLoading }
 /**
  * 用于获取默认 loading 的 html 模板
  */
-async function getDefaultLoadingHtml() {
-  return await fsp.readFile(new URL('./default-loading.html', import.meta.url), 'utf8')
+function getDefaultLoadingHtml() {
+  return readFileSync(new URL('./default-loading.html', import.meta.url), 'utf8')
 }
 
 /**
  * 用于生成将loading样式注入到项目中
  * 为多app提供loading样式，无需在每个 app -> index.html单独引入
  */
-async function viteInjectAppLoadingPlugin(): Promise<PluginOption | undefined> {
-  const loadingHtml = await getDefaultLoadingHtml()
-
-  if (!loadingHtml) {
-    return
-  }
+function viteInjectAppLoadingPlugin(): Plugin {
+  const loadingHtml = getDefaultLoadingHtml()
 
   return {
     enforce: 'pre',

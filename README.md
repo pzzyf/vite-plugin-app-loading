@@ -41,18 +41,8 @@ If TypeScript cannot resolve the virtual module, add this once to your Vite env 
 ## Options
 
 ```ts
-function viteInjectAppLoadingPlugin(): Promise<PluginOption | undefined>;
+function viteInjectAppLoadingPlugin(): Plugin;
 ```
-
-## Release
-
-```sh
-pnpm run changeset
-```
-
-Commit the generated changeset. After the change lands on `main`, GitHub Actions creates a version PR. Merge that version PR to publish the package to npm.
-
-The release workflow requires an `NPM_TOKEN` secret in the GitHub repository.
 
 ## Thanks
 
